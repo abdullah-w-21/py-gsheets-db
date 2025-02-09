@@ -1,27 +1,26 @@
 import unittest
 from unittest.mock import patch, MagicMock
-from py_ghseets_db import GSheetsDB
-
+from py_gsheets_db import GSheetsDB
 
 class TestGSheetsDB(unittest.TestCase):
     def setUp(self):
         self.credentials_path = "fake_credentials.json"
         self.spreadsheet_id = "fake_spreadsheet_id"
-
+        
         # Create mock service
         self.mock_service = MagicMock()
         self.mock_sheets = MagicMock()
         self.mock_service.spreadsheets.return_value = self.mock_sheets
-
+        
         # Patch the build function
-        self.build_patcher = patch('gsheets_db.core.build')
+        self.build_patcher = patch('py_gsheets_db.core.build')
         self.mock_build = self.build_patcher.start()
         self.mock_build.return_value = self.mock_service
-
+        
         # Patch the Credentials
-        self.creds_patcher = patch('gsheets_db.core.ServiceAccountCreds')
+        self.creds_patcher = patch('py_gsheets_db.core.ServiceAccountCreds')
         self.mock_creds = self.creds_patcher.start()
-
+        
         # Initialize the database
         self.db = GSheetsDB(self.credentials_path, self.spreadsheet_id)
 
@@ -117,7 +116,6 @@ class TestGSheetsDB(unittest.TestCase):
         # Assert
         self.assertTrue(result)
         self.mock_sheets.values.return_value.update.assert_called_once()
-
 
 if __name__ == '__main__':
     unittest.main()
