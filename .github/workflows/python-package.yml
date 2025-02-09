@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -25,15 +25,28 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        python -m pip install build pytest pytest-cov
+        python -m pip install pytest pytest-cov
+        python -m pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib
         pip install -e .
     
-    - name: List directory contents
+    - name: Show package structure
       run: |
+        echo "Current directory:"
         pwd
+        echo "\nDirectory contents:"
         ls -la
+        echo "\nPackage contents:"
         ls -la py_gsheets_db/
+        echo "\nPython path:"
+        python -c "import sys; print('\n'.join(sys.path))"
+        echo "\nInstalled packages:"
+        pip list
+    
+    - name: Show test file content
+      run: |
+        echo "Test file content:"
+        cat tests/test_gsheets_db.py
     
     - name: Run tests
       run: |
-        python -m pytest tests/ -v
+        PYTHONPATH=$PYTHONPATH:$(pwd) pytest tests/ -v
