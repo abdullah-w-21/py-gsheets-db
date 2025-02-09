@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "py-gsheets-db"
-version = "0.1.1"
-description = "A Python library for using Google Sheets as a database because I felt a need to make it."
+version = "0.1.0"
+description = "A Python library for using Google Sheets as a database"
 readme = "README.md"
 authors = [{name = "Abdullah Wasim", email = "abdullahwasimm2112@gmail.com"}]
 license = {file = "LICENSE"}
@@ -15,14 +15,12 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.7",
-    "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
 ]
-requires-python = ">=3.7"
+requires-python = ">=3.9"
 dependencies = [
     "google-api-python-client>=2.0.0",
     "google-auth-httplib2>=0.1.0",
@@ -32,3 +30,12 @@ dependencies = [
 [project.urls]
 Homepage = "https://github.com/abdullah-w-21/py-gsheets-db"
 Repository = "https://github.com/abdullah-w-21/py-gsheets-db.git"
+
+[tool.pytest.ini_options]
+pythonpath = [
+    "."
+]
+addopts = "-ra -q"
+testpaths = [
+    "tests",
+]
