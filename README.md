@@ -1,4 +1,4 @@
-# GSheetsDB
+# py-gsheets-db
 
 A Python library for using Google Sheets as a database. This library provides a simple interface to perform database-like operations on Google Sheets.
 
